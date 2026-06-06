@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Site Metas -->
+    <title>Krishna Aggarwal | Computational Neuroscience</title>
+    <meta name="keywords" content="computational neuroscience, EEG, neural dynamics, IISER Mohali">
+    <meta name="description" content="Personal webpage of Krishna Aggarwal">
+    <meta name="author" content="Krishna Aggarwal">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+/* ── Base (matches Navdeep's style.css body/font/color scheme) ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    color: #322d31;
+    font-size: 15px;
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1.80857;
+}
+
+a {
+    color: #000080;
+    text-decoration: none !important;
+    outline: none !important;
+    transition: all .3s ease-in-out;
+}
+a:hover { color: #000060; }
+
+h1,h2,h3,h4,h5,h6 {
+    letter-spacing: 0;
+    font-weight: normal;
+    position: relative;
+    padding: 0 0 10px 0;
+    line-height: 120% !important;
+    color: #333333;
+    margin: 0;
+}
+h1 { font-size: 24px }
+h2 { font-size: 22px }
+h3 { font-size: 18px }
+h4 { font-size: 16px }
+
+ul, li, ol { margin: 0; list-style: none; padding: 0; }
+
+p { word-break: break-word; hyphens: auto; }
+
+/* ── Preloader ── */
+#preloader {
+    width: 100%; height: 100%;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: #333333;
+    z-index: 11000;
+    position: fixed;
+    display: block;
+}
+#main-ld {
+    width: 70px; height: 70px;
+    overflow: hidden; position: absolute;
+    top: calc(50% - 17px); left: calc(50% - 35px);
+}
+#loader {
+    width: 70px; height: 70px;
+    border-style: solid;
+    border-top-color: #FFF; border-right-color: #FFF;
+    border-left-color: transparent; border-bottom-color: transparent;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotate 3s ease-in-out infinite;
+    transform: rotate(-200deg);
+}
+@keyframes rotate {
+    0%   { border-width: 10px; }
+    25%  { border-width: 3px; }
+    50%  { transform: rotate(115deg); border-width: 10px; }
+    75%  { border-width: 3px; }
+    100% { border-width: 10px; }
+}
+
+/* ── Navbar ── */
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-size: 14px;
+    position: relative;
+}
+.navbar-dark .navbar-nav .nav-link:hover { color: #ffffff; }
+.navbar-dark .navbar-nav .nav-link.active { font-weight: 600; }
+.navbar-dark .navbar-nav .nav-link::after {
+    content: '';
+    width: 0; height: 3px;
+    background: #ffffff;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    text-align: center; margin: 0 auto;
+    border-radius: 0;
+    transition: all .5s;
+    z-index: -1;
+}
+.navbar-dark .navbar-nav .nav-link.active::after { width: 50%; }
+#mainNav.navbar-shrink {
+    padding-top: 10px; padding-bottom: 10px;
+    background-color: #333333;
+}
+
+/* ── Hero / main banner ── */
+.main-banner {
+    height: 100%;
+    display: table;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+.main-banner::after {
+    content: " ";
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background-color: #000;
+    z-index: 0;
+    opacity: .6;
+}
+.heading {
+    color: #fff;
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1;
+}
+.heading h1 {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 52px;
+    text-transform: uppercase;
+}
+.heading p { font-size: 18px; padding: 20px 0; }
+.heading h3 { color: #ffffff; }
+
+/* Typing / cd-headline clip */
+.cd-words-wrapper {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+}
+.cd-words-wrapper b {
+    display: inline-block;
+    position: absolute;
+    white-space: nowrap;
+    left: 0; top: 0;
+}
+.cd-words-wrapper b.is-visible { position: relative; }
+
+.cd-headline.clip span {
+    display: inline-block;
+    padding: .2em 0;
+    color: #ffffff;
+    font-size: 26px;
+}
+.cd-headline.clip span b { text-transform: uppercase; }
+.cd-headline.clip .cd-words-wrapper {
+    overflow: hidden;
+    vertical-align: top;
+}
+.cd-headline.clip .cd-words-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 2px; height: 100%;
+    background-color: #000080;
+}
+.cd-headline.clip b { opacity: 0; }
+.cd-headline.clip b.is-visible { opacity: 1; }
+
+/* SVG clouds */
+#clouds { margin-top: -5%; position: relative; z-index: 1; }
+#clouds path { fill: #ffffff; stroke: #ffffff; }
+
+/* ── Sections ── */
+.section {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    padding: 70px 0;
+}
+.section.wb { background-color: #ffffff; }
+.section.lb { background-color: #f2f3f5; }
+.section.db { background-color: #111111; }
+
+.section-title { display: block; position: relative; margin-bottom: 50px; }
+.section-title p { color: #322d31; font-weight: 400; font-size: 16px; line-height: 28px; margin: 0; }
+.section-title h3 { font-size: 32px; font-weight: 500; line-height: 52px; margin: 0 0 20px; padding: 0; }
+.section.db .section-title h3 { color: #ffffff; }
+.section.db .section-title p { color: #aaaaaa; }
+
+/* ── About ── */
+.message-box h2 { font-size: 32px; font-weight: 300; padding: 0 0 10px; margin: 0; line-height: 52px; }
+.message-box p  { margin-bottom: 20px; font-size: 15px; }
+
+.right-box-pro {
+    position: relative;
+    -webkit-box-shadow: 0 0 30px -4px rgba(0,0,0,.3);
+    box-shadow: 0 0 30px -4px rgba(0,0,0,.3);
+}
+.right-box-pro img { position: relative; z-index: 2; }
+
+/* img circle for about photo */
+.img-circle { border-radius: 50%; }
+.about-photo-wrapper {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2f3f5;
+}
+.about-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+/* ── CTA / download button ── */
+.btn-hover-new {
+    color: #000080;
+    transition: all 0.5s;
+    position: relative;
+    border: 1px solid #333333;
+    overflow: hidden;
+    padding: 0 18px;
+    display: inline-block;
+}
+.sim-btn { line-height: 50px; height: 50px; text-align: center; cursor: pointer; }
+.btn-hover-new::after {
+    content: attr(data-text);
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    opacity: 0;
+    transform: translate(-30%, 0);
+    transition: all 0.3s;
+}
+.btn-hover-new span { transition: all 0.3s; }
+.btn-hover-new:hover { color: #ffffff; background-color: #333333; }
+.btn-hover-new:hover > span { opacity: 0; transform: translate(0,40px); }
+.btn-hover-new:hover::after { opacity: 1; transform: translate(0,0); }
+
+/* ── Research entries ── */
+.research-entry {
+    border-bottom: 1px solid #e0ddd8;
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+}
+.research-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.research-entry h4 { font-size: 17px; font-weight: 600; color: #000080; padding-bottom: 4px; }
+.research-entry h4 a { color: #000080; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.research-entry h4 a:hover { border-bottom-color: #000080; }
+.research-entry .meta { font-size: 13px; color: #888; font-style: italic; margin-bottom: 12px; }
+.research-entry ul { padding-left: 18px; list-style: disc; }
+.research-entry ul li { font-size: 14px; color: #444; line-height: 1.75; margin-bottom: 6px; }
+.research-entry .code-note { font-size: 13px; color: #999; font-style: italic; margin-top: 10px; }
+
+/* ── Project cards ── */
+.proj-card {
+    background: #ffffff;
+    border: 1px solid #e0ddd8;
+    border-radius: 3px;
+    padding: 22px 22px 18px;
+    margin-bottom: 20px;
+    transition: box-shadow .2s, transform .2s;
+}
+.proj-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.1); transform: translateY(-2px); }
+.proj-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; padding-bottom: 0; }
+.proj-card h4 a { color: #000080; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.proj-card h4 a:hover { border-bottom-color: #000080; }
+.proj-card p { font-size: 13.5px; color: #666; margin: 0; line-height: 1.68; }
+
+/* ── Skills ── */
+.skill-group { background: #ffffff; border: 1px solid #e0ddd8; border-radius: 3px; padding: 20px 22px; margin-bottom: 20px; }
+.skill-group h4 { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #000080; margin-bottom: 12px; padding-bottom: 0; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag { font-size: 12px; color: #444; background: #f2f3f5; border: 1px solid #e0ddd8; padding: 4px 10px; border-radius: 3px; }
+
+/* ── Publications ── */
+.pub-entry { border-left: 3px solid #000080; padding-left: 22px; margin-bottom: 20px; }
+.pub-entry p { font-size: 15px; color: #322d31; line-height: 1.80; margin-bottom: 10px; }
+.pub-conf-label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+.pub-entry ul { padding-left: 16px; list-style: disc; }
+.pub-entry ul li { font-size: 14px; color: #666; margin-bottom: 5px; line-height: 1.65; }
+
+/* ── Contact ── */
+#contact { background: #111111; }
+#contact .section-title h3 { color: #ffffff; }
+#contact .section-title p  { color: #cccccc; }
+
+/* Social icon wrapper — exact match to Navdeep's */
+.wrapper { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.wrapper .icon {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 0%;
+    width: 48px; height: 48px;
+    line-height: 10px;
+    font-size: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 10px rgba(0,0,0,.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(.68,-.55,.265,1.55);
+    color: #333;
+    text-decoration: none;
+}
+.wrapper .tooltip-box {
+    position: absolute;
+    top: 0;
+    line-height: 1.5;
+    font-size: 13px;
+    background-color: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0,0,0,.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(.68,-.55,.265,1.55);
+    white-space: nowrap;
+}
+.wrapper .tooltip-box::before {
+    position: absolute;
+    content: "";
+    height: 8px; width: 8px;
+    background-color: #ffffff;
+    bottom: -3px; left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(.68,-.55,.265,1.55);
+}
+.wrapper .icon:hover .tooltip-box { top: -45px; opacity: 1; pointer-events: auto; }
+
+.wrapper .linkedin:hover, .wrapper .linkedin:hover .tooltip-box, .wrapper .linkedin:hover .tooltip-box::before
+    { background-color: #0077b5; color: #fff; }
+.wrapper .twitter:hover, .wrapper .twitter:hover .tooltip-box, .wrapper .twitter:hover .tooltip-box::before
+    { background-color: #46c1f6; color: #fff; }
+.wrapper .github:hover, .wrapper .github:hover .tooltip-box, .wrapper .github:hover .tooltip-box::before
+    { background-color: #333333; color: #fff; }
+.wrapper .arxiv:hover, .wrapper .arxiv:hover .tooltip-box, .wrapper .arxiv:hover .tooltip-box::before
+    { background-color: #b31b1b; color: #fff; }
+
+/* ── Scroll-to-top ── */
+.dmtop {
+    background-color: #3C3D41;
+    z-index: 100;
+    width: 50px; height: 50px;
+    line-height: 47px;
+    position: fixed;
+    bottom: -100px;
+    border-radius: 3px;
+    right: 50px;
+    text-align: center;
+    font-size: 28px;
+    color: #ffffff !important;
+    cursor: pointer;
+    transition: all .7s ease-in-out;
+}
+.dmtop.show { bottom: 50px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .heading h1 { font-size: 32px; }
+    .heading p  { font-size: 15px; }
+    .cd-headline.clip span { font-size: 18px; }
+}
+    </style>
+</head>
+
+<body id="page-top" class="politics_version">
+
+    <!-- LOADER -->
+    <div id="preloader">
+        <div id="main-ld">
+            <div id="loader"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <!-- <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span style="font-size:16px; font-weight:700; letter-spacing:1px;">Krishna Aggarwal</span>
+        </a> -->
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase mx-auto">
+            <li class="nav-item"><a class="nav-link js-scroll-trigger active" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#research">Research</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#publications">Publications</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HOME — fullscreen banner with background image -->
+    <section id="home" class="main-banner parallaxie" style="background: url('uploads/banner.png') center center / cover no-repeat; min-height: 100vh;">
+        <div class="heading">
+            <h1>Hello, I'm Krishna Aggarwal</h1>
+            <p>Integrated BS-MS Student &nbsp;&middot;&nbsp; IISER Mohali &nbsp;&middot;&nbsp; Computational Neuroscience</p>
+            <h3 class="cd-headline clip is-full-width">
+                <span>My experiences are in:&nbsp;</span>
+                <span class="cd-words-wrapper">
+                    <b class="is-visible">Neural Dynamics</b>
+                    <b>Recurrent Neural Networks</b>
+                    <b>Oscillatory Networks</b>
+                    <b>Nonlinear & Coupled Dynamical Systems</b>
+                    <b>Brain Signal Analysis</b>
+                    <b>Deep Learning for Neural Data</b>
+                    <b>Cognitive Modelling</b>
+                    <b>Computational Neuroscience</b>
+                    <b>Neuro-inspired Deep Learning</b>
+                </span>
+            </h3>
+        </div>
+    </section>
+
+    <!-- SVG wave separator (same as Navdeep) -->
+    <svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 85 100" preserveAspectRatio="none">
+        <path d="M-5 100 Q 0 20 5 100 Z M0 100 Q 5 0 10 100 M5 100 Q 10 30 15 100 M10 100 Q 15 10 20 100 M15 100 Q 20 30 25 100 M20 100 Q 25 -10 30 100 M25 100 Q 30 10 35 100 M30 100 Q 35 30 40 100 M35 100 Q 40 10 45 100 M40 100 Q 45 50 50 100 M45 100 Q 50 20 55 100 M50 100 Q 55 40 60 100 M55 100 Q 60 60 65 100 M60 100 Q 65 50 70 100 M65 100 Q 70 20 75 100 M70 100 Q 75 45 80 100 M75 100 Q 80 30 85 100 M80 100 Q 85 20 90 100 M85 100 Q 90 50 95 100 M90 100 Q 95 25 100 100 M95 100 Q 100 15 105 100 Z"></path>
+    </svg>
+
+    <!-- ABOUT -->
+    <div id="about" class="section wb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="message-box">
+                        <h2>About Me</h2>
+                        <p>
+                            I am a final-year BS-MS student at IISER Mohali (Biology Major, Data Science Minor, CPI: 8.6/10),
+                            with my MS thesis completed at the Computational Neuroscience Laboratory, IIT Madras, under
+                            Prof. V. Srinivasa Chakravarthy. My work sits at the intersection of dynamical systems, deep learning,
+                            and neural data analysis — studying how computation arises in the brain through the structure of neural dynamics.
+                        </p>
+                        <p>
+                            My recent projects focused on EEG-based neural decoding using oscillatory neural networks, where temporal and
+                            oscillatory dynamics are treated as computational primitives rather than features to average away.
+                            I have a growing interest in latent population dynamics, state-space modelling, and how the time-evolution
+                            of neural activity reflects underlying cognitive computation.
+                        </p>
+                        <p style="margin-bottom: 0;"><strong>Research Interests:</strong></p>
+                        <ol style="margin: 0 0 10px 5px; padding-left: 0;">
+                            <li>Computational & Theoretical Neuroscience</li>
+                            <li>Computational Cognitive Modelling</li>
+                            <li>Latent Neural & Oscillatory Dynamics</li>
+                            <li>Nonlinear Systems</li>
+                            <li>Mathematical Modelling of Neural Activity</li>
+                            <li>Neuro-inspired Deep Learning</li>
+                            <li>Brain Signal Analysis</li>
+                        </ol>
+                        <a href="uploads/CV_Krishna_Aggarwal.pdf" target="_blank" class="sim-btn btn-hover-new" data-text="Check CV"><span>Check CV</span></a>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="right-box-pro wow fadeIn">
+                        <!--
+                            TO ADD YOUR PHOTO:
+                            1. Place your photo file (e.g. about_me.jpg) inside the "uploads/" folder
+                               alongside index.html
+                            2. Replace the placeholder below with:
+                               <img src="uploads/about_me.jpg" alt="Krishna Aggarwal" class="img-fluid img-circle">
+                        -->
+                        <div class="about-photo-wrapper">
+                            <img src="uploads/about_me.jpeg" alt="Krishna Aggarwal" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESEARCH EXPERIENCE -->
+    <div id="research" class="section lb">
+        <div class="container">
+            <div class="section-title text-left">
+                <h3>Research Experience</h3>
+            </div>
+
+            <div class="research-entry">
+                <h4>EEG-based Cursor Navigation with Deep Oscillatory Neural Networks</h4>
+                <div class="meta">MS Thesis &nbsp;&middot;&nbsp; Computational Neuroscience Lab, IIT Madras &nbsp;&middot;&nbsp; PI: Prof. V. Srinivasa Chakravarthy &nbsp;&middot;&nbsp; Aug 2025 &ndash; Apr 2026</div>
+                <ul>
+                    <li>Built Dense Oscillatory Neural Network (DONN) and topomap-based Oscillatory CNN architectures using Hopf-bifurcation oscillator layers, treating temporal dynamics as a learned computational primitive rather than a feature to average away.</li>
+                    <li>Benchmarked these against EEGNet, CNN-LSTM, CNN with PSD features (XGBoost), and Riemannian (covariance and tangent space) pipelines on 128-channel EEG from 20 subjects, using Leave-One-Block-Out cross-validation for subject-level generalisation.</li>
+                    <li>Designed and ran full data acquisition: custom MATLAB protocol with NetStation SDK integration for millisecond-precision event marker synchronisation, plus a preprocessing pipeline with band-pass filtering, ICA-based artifact removal, and epoch-level normalisation.</li>
+                    <li>Studying whether dynamical priors improve robustness and generalisation under high trial-to-trial variability &mdash; a question relevant to how dynamical structure supports robust neural computation.</li>
+                </ul>
+                <p class="code-note"><em>Code and data are in preparation &mdash; finalised files will be released soon.</em></p>
+            </div>
+
+            <div class="research-entry">
+                <h4><a href="https://github.com/KrishnaAggarwal2003/Neural-Reconstruction-of-STN-LFP-Signals-via-Rossler-Dynamics-and-Deep-Networks" target="_blank">Reconstructing STN-LFP Signals Using Neural Networks</a></h4>
+                <div class="meta">Computational Neuroscience Lab, IIT Madras &nbsp;&middot;&nbsp; PI: Prof. V. Srinivasa Chakravarthy &nbsp;&middot;&nbsp; May 2024 &ndash; Jul 2024</div>
+                <ul>
+                    <li>Built coupled R&ouml;ssler oscillator networks with Hermitian complex-weight coupling as a generative model for subthalamic nucleus LFPs from Parkinson's patients, with synchronisation, phase coupling, and beta-band dynamics as the core computational primitives.</li>
+                    <li>Compared feedforward, LSTM, and Flip-Flop RNN architectures for mapping oscillatory dynamics onto experimental signals, evaluating reconstruction in both time and frequency domains.</li>
+                    <li>Showed that recurrent and dynamical-systems-inspired architectures preserve the 13&ndash;30 Hz beta-band synchronisation peak, where purely feedforward models lose this temporal structure entirely.</li>
+                </ul>
+            </div>
+
+            <div class="research-entry">
+                <h4><a href="https://github.com/KrishnaAggarwal2003/Computational-Analysis-of-Memory-Load-in-Language-Comprehension" target="_blank">Computational Analysis of Memory Load in Sentence Comprehension</a></h4>
+                <div class="meta">Cognitive Science Department, IIT Kanpur &nbsp;&middot;&nbsp; Nov 2024 &ndash; May 2025</div>
+                <ul>
+                    <li>Built computational pipelines on multilingual Universal Dependencies data to extract structural features &mdash; dependency length, intervening elements, sentence complexity &mdash; and quantify their effect on memory load using linear mixed-effects models.</li>
+                    <li>Analysed how structural constraints shape information processing across 23 languages, linking formal linguistic structure to processing difficulty. Resulted in a first-author preprint and two conference acceptances.</li>
+                </ul>
+            </div>
+
+            <div class="research-entry">
+                <h4>Computational Behavioural Analysis: Systems Neuroscience</h4>
+                <div class="meta">HM Lab, IISER Mohali &nbsp;&middot;&nbsp; Sept 2024 &ndash; Dec 2024</div>
+                <ul>
+                    <li>Developed Python/OpenCV pipelines to extract behavioural variables from rodent video recordings in a systems neuroscience experiment, including motion tracking and pose-based feature extraction.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="projects" class="section wb">
+        <div class="container">
+            <div class="section-title text-left">
+                <h3>Projects</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="proj-card">
+                        <h4><a href="https://github.com/KrishnaAggarwal2003/Hodgkin-Huxley-model" target="_blank">Biophysical Neuron Simulation (Hodgkin-Huxley Model)</a></h4>
+                        <p>Implemented and analysed conductance-based neuron models to study action potential generation, threshold dynamics, and ion channel contributions to spike timing.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="proj-card">
+                        <h4><a href="https://github.com/KrishnaAggarwal2003/Kuramoto_model" target="_blank">Synchronisation in Coupled Oscillators (Kuramoto Model)</a></h4>
+                        <p>Simulated phase synchronisation in coupled oscillator systems, studying transitions to coherence as a function of coupling strength and natural frequency distribution.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="proj-card">
+                        <h4><a href="https://github.com/KrishnaAggarwal2003/Logistic-Coupled-Map-lattice" target="_blank">Spatio-Temporal Chaos in Coupled Map Lattices</a></h4>
+                        <p>Studied pattern formation, travelling waves, and chaotic dynamics in nonlinear discrete systems with local coupling.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="proj-card">
+                        <h4><a href="https://github.com/KrishnaAggarwal2003/Mouse-Movement-Analysis-using-OpenCV" target="_blank">Motion Detection and Behavioural Analysis Pipeline</a></h4>
+                        <p>Developed a computer vision pipeline using OpenCV to extract and analyse motion patterns from video data for systems neuroscience experiments.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="proj-card">
+                        <h4><a href="https://github.com/KrishnaAggarwal2003/Image-Classification-with-CNN-models" target="_blank">Image Classification with CNN Models</a></h4>
+                        <p>Implemented and benchmarked a feedforward ANN and two CNN architectures (decreasing and increasing filter widths) on the CIFAR-10 dataset, with parallel implementations in both TensorFlow/Keras and PyTorch for direct framework comparison.</p>
+                    </div>
+                </div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Question-Identification-using-Text-Vectorization-and-ML-Classifiers" target="_blank">Question Identification using Text Vectorization and ML Classifiers</a></h4>
+        <p>Identified questions in text by combining four vectorisation techniques (TF-IDF, word embeddings, LDA, LSA) with four classical ML classifiers (Logistic Regression, Bernoulli Naive Bayes, Random Forest, SVM), comparing all 16 pipelines using ROC curves.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Regression-Algorithms-from-Scratch" target="_blank">Regression Algorithms from Scratch</a></h4>
+        <p>Implemented linear and logistic regression from scratch in NumPy with manual gradient descent, L1/L2 regularisation, and early stopping, with full evaluation via MSE/MAE/R² (linear) and confusion matrix/ROC-AUC (logistic).</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/MLP-for-Digit-recognition" target="_blank">MLP for Digit Recognition</a></h4>
+        <p>Built a multi-layer perceptron for MNIST digit classification with both ReLU and Sigmoid activations using PyTorch, plus a separate from-scratch NumPy implementation including momentum-based backpropagation.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Cellular_Automatons" target="_blank">Cellular Automata Simulations</a></h4>
+        <p>Simulated three families of cellular automata: Wolfram's 256-rule elementary 1-D CA, Conway's Game of Life, and a stochastic 2-D SIRS epidemic model with susceptible-to-infected transitions driven by neighbour density.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Non-Linear-systems" target="_blank">Nonlinear Dynamical Systems</a></h4>
+        <p>Studied the Rössler system (with parameter-sweep bifurcation diagrams across all three parameters) and the Lorenz system, illustrating limit-cycle and point attractors and chaotic regimes in low-dimensional nonlinear dynamics.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Web-Scraping" target="_blank">LLM-based Web Scraper</a></h4>
+        <p>Built an AI-assisted web scraper using Selenium and ChromeDriver for DOM extraction, with the Llama 3.2 1B model (via Ollama) parsing the scraped content, all wrapped in a Streamlit interface.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Graph-making-webpage" target="_blank">Interactive Graph-Plotting Web App</a></h4>
+        <p>Built a Streamlit web app that lets users generate bar, line, and scatter plots either by uploading CSV/XLSX files or by entering data manually, deployed live on Streamlit Cloud.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Currency-Converter-with-fetch-API" target="_blank">Currency Converter (Fetch API)</a></h4>
+        <p>Built a browser-based currency converter using vanilla HTML, CSS, and JavaScript, pulling live exchange rates through the Fetch API from a public exchange rate endpoint.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Rock_Paper_Scissors-Game" target="_blank">Rock Paper Scissors Game</a></h4>
+        <p>A browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaScript, with player-vs-computer logic and interactive UI for casual gameplay.</p>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="proj-card">
+        <h4><a href="https://github.com/KrishnaAggarwal2003/Tic-Tac-Toe-Gameplay" target="_blank">Tic-Tac-Toe Game</a></h4>
+        <p>A classic two-player Tic-Tac-Toe game built with HTML, CSS, and JavaScript, with turn handling, win-condition detection, and a clean grid-based interface.</p>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div id="skills" class="section lb">
+        <div class="container">
+            <div class="section-title text-left">
+                <h3>Skills</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="skill-group">
+                        <h4>Dynamical Systems &amp; Computational Modelling</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Nonlinear dynamics</span>
+                            <span class="skill-tag">Coupled-oscillator systems (R&ouml;ssler; Hopf; Kuramoto)</span>
+                            <span class="skill-tag">Bifurcation analysis</span>
+                            <span class="skill-tag">Biophysical neuron modelling</span>
+                            <span class="skill-tag">Recurrent network dynamics</span>
+                            <span class="skill-tag">Numerical simulation of nonlinear systems</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-group">
+                        <h4>Machine Learning & Deep learning</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Convolutional & recurrent neural network architectures</span>
+                            <span class="skill-tag">Sequence & time-series modelling</span>
+                            <span class="skill-tag">Model evaluation & hyper-parameter tuning</span>
+                            <span class="skill-tag">Gradient boosting & classical ML pipelines</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-group">
+                        <h4>Brain Signal Analysis</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">EEG and LFP processing</span>
+                            <span class="skill-tag">ICA-based artefact removal</span>
+                            <span class="skill-tag">Spectral and Phase-based methods</span>
+                            <span class="skill-tag">Epoching and event-locked analysis</span>
+                            <span class="skill-tag">Multivariate decoding</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-group">
+                        <h4>Programming &amp; Tools</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python (Matplotlib, Seaborn, NumPy, SciPy, Pandas, Streamlit, LangChain)</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">JAX</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">MATLAB</span>
+                            <span class="skill-tag">Julia</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Unix / Linux</span>
+                            <span class="skill-tag">LaTeX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PUBLICATIONS -->
+    <div id="publications" class="section wb">
+        <div class="container">
+            <div class="section-title text-left">
+                <h3>Publications &amp; Preprints</h3>
+            </div>
+            <div class="pub-entry">
+                <p>
+                    Aggarwal, K. (2025). Cross-Linguistic Analysis of Memory Load in Sentence Comprehension:
+                    Linear Distance and Structural Density. <em>arXiv preprint.</em>
+                    <a href="https://arxiv.org/abs/2509.20916" target="_blank">https://arxiv.org/abs/2509.20916</a>
+                </p>
+                <div class="pub-conf-label"><strong>Accepted for presentation at:</strong></div>
+                    <ul>
+                    <li><a href="https://drive.google.com/file/d/1lhR0wf2eiwmZMBxUaoD_TD861zgJUPFG/view?pli=1" target="_blank" rel="noopener noreferrer">7th International Conference on the Mathematics of Neuroscience &amp; AI (ICMNS 2026), Rome, Italy &mdash; June 2026</a></li>
+                    <li><a href="https://drive.google.com/file/d/1ZSQL13rULR4nvw0cOMjpPJlFAklvsBD2/view?usp=sharing" target="_blank" rel="noopener noreferrer">Dubrovnik Conference on Cognitive Science (DUCOG 2026), Croatia &mdash; May 2026</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="section db">
+        <div class="container">
+            <div class="section-title text-left">
+                <h3>Contact</h3>
+                <p>
+                    Write to me at <b><i>aggarwalkrishna2811@gmail.com</i></b><br>
+                    Phone: <b><i>+91-9463847695</i></b><br>
+                    You can also connect with me through the following:
+                </p>
+            </div>
+            <div class="wrapper">
+                <a href="https://www.linkedin.com/in/krishnaaggarwal2003/" target="_blank" class="icon linkedin">
+                    <div class="tooltip-box">LinkedIn</div>
+                    <span><i class="fab fa-linkedin-in"></i></span>
+                </a>
+                <a href="https://twitter.com/KrAggarwal2003" target="_blank" class="icon twitter">
+                    <div class="tooltip-box">Twitter</div>
+                    <span><i class="fab fa-twitter"></i></span>
+                </a>
+                <a href="https://github.com/KrishnaAggarwal2003" target="_blank" class="icon github">
+                    <div class="tooltip-box">GitHub</div>
+                    <span><i class="fab fa-github"></i></span>
+                </a>
+                <a href="https://arxiv.org/abs/2509.20916" target="_blank" class="icon arxiv" style="font-size:14px; font-weight:700;">
+                    <div class="tooltip-box">arXiv</div>
+                    <span>arXiv</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <center>
+        <p style="color:#666; font-size:12px; padding:16px 0; background:#111111;">
+            &copy; Krishna Aggarwal &nbsp;&middot;&nbsp; IISER Mohali &nbsp;&middot;&nbsp; Computational Neuroscience
+        </p>
+    </center>
+
+    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+    <!-- JS -->
+    <!-- jQuery + Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+
+        /* ── Preloader ── */
+        setTimeout(function() { $('#preloader').fadeOut('slow'); }, 800);
+
+        /* ── Navbar shrink on scroll ── */
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('#mainNav').addClass('navbar-shrink');
+            } else {
+                $('#mainNav').removeClass('navbar-shrink');
+            }
+        });
+
+        /* ── Smooth scroll for nav links ── */
+        $('.js-scroll-trigger').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this).attr('href');
+            if (target && $(target).length) {
+                $('html, body').animate({ scrollTop: $(target).offset().top - 58 }, 600);
+            }
+            /* Update active state */
+            $('.js-scroll-trigger').removeClass('active');
+            $(this).addClass('active');
+            /* Close mobile menu */
+            $('.navbar-collapse').collapse('hide');
+        });
+
+        /* ── Active nav on scroll ── */
+        $(window).scroll(function() {
+            var scrollPos = $(this).scrollTop() + 70;
+            var sections = ['home','about','research','projects','skills','publications','contact'];
+            sections.forEach(function(id) {
+                var el = $('#' + id);
+                if (el.length && el.offset().top <= scrollPos && el.offset().top + el.outerHeight() > scrollPos) {
+                    $('.js-scroll-trigger').removeClass('active');
+                    $('.js-scroll-trigger[href="#' + id + '"]').addClass('active');
+                }
+            });
+        });
+
+        /* ── Scroll to top button ── */
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) { $('#scroll-to-top').addClass('show'); }
+            else { $('#scroll-to-top').removeClass('show'); }
+        });
+        $('#scroll-to-top').click(function(e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, 500);
+        });
+
+        /* ── cd-headline typing animation ── */
+        var wordDelay   = 2000;
+        var letterSpeed = 80;
+        var deleteSpeed = 50;
+
+        function startHeadlineAnimation($headline) {
+            var $words = $headline.find('.cd-words-wrapper b');
+            var currentIndex = 0;
+
+            function showWord(index) {
+                var $word = $words.eq(index);
+                var text = $word.data('fulltext') || $word.text();
+                $word.data('fulltext', text);
+                $word.text('').addClass('is-visible');
+                var i = 0;
+                var interval = setInterval(function() {
+                    i++;
+                    $word.text(text.slice(0, i));
+                    if (i === text.length) {
+                        clearInterval(interval);
+                        setTimeout(function() { hideWord(index); }, wordDelay);
+                    }
+                }, letterSpeed);
+            }
+
+            function hideWord(index) {
+                var $word = $words.eq(index);
+                var text = $word.data('fulltext') || $word.text();
+                var i = text.length;
+                var interval = setInterval(function() {
+                    i--;
+                    $word.text(text.slice(0, i));
+                    if (i === 0) {
+                        clearInterval(interval);
+                        $word.removeClass('is-visible');
+                        currentIndex = (index + 1) % $words.length;
+                        showWord(currentIndex);
+                    }
+                }, deleteSpeed);
+            }
+
+            showWord(currentIndex);
+        }
+
+        /* Start the animation */
+        startHeadlineAnimation($('.cd-headline'));
+    });
+    </script>
+
+</body>
+</html>
